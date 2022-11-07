@@ -1,0 +1,66 @@
+{
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "target": "ESNext",
+    "outDir": "dist",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+
+    "allowUmdGlobalAccess": false,
+    "resolveJsonModule": true,
+
+    "allowJs": false,
+    "checkJs": false,
+
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true,
+    "inlineSourceMap": false,
+    "inlineSources": true,
+    "removeComments": false,
+    "importHelpers": false,
+    "downlevelIteration": true,
+    "newLine": "lf",
+    "noEmitHelpers": false,
+    "noEmitOnError": true,
+    "preserveConstEnums": true,
+    "preserveValueImports": false,
+
+    "isolatedModules": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "preserveSymlinks": true,
+    "forceConsistentCasingInFileNames": true,
+
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "strictPropertyInitialization": true,
+    "noImplicitThis": true,
+
+    "useDefineForClassFields": true,
+    "useUnknownInCatchVariables": false,
+
+    "alwaysStrict": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": false,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": false,
+    "allowUnusedLabels": false,
+    "allowUnreachableCode": false,
+
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": true,
+    "suppressImplicitAnyIndexErrors": true
+  },
+  "include": ["src"],
+  "typedocOptions": {
+    "entryPoints": ["src/main.ts"],
+    "out": "docs"
+  }
+}

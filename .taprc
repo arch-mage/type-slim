@@ -1,0 +1,9 @@
+check-coverage: true
+coverage: true
+node-arg:
+  - --no-warnings
+  - --experimental-loader
+  - '@istanbuljs/esm-loader-hook'
+test-regex: dist/.*\.test.js$
+ts: false
+reporter: specy

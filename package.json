@@ -1,0 +1,57 @@
+{
+  "name": "type-slim",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "A collection of composable type guard functions",
+  "main": "dist/main.js",
+  "files": [
+    "dist",
+    "!dist/**/*.test.*"
+  ],
+  "types": "dist",
+  "keywords": [
+    "schema",
+    "typescript",
+    "typecheck",
+    "validate"
+  ],
+  "exports": {
+    ".": "./dist/main.js",
+    "./isBool": "./dist/isBool.js",
+    "./isNull": "./dist/isNull.js",
+    "./isNumber": "./dist/isNumber.js",
+    "./isString": "./dist/isString.js",
+    "./isUndefined": "./dist/isUndefined.js",
+    "./isNonNil": "./dist/isNonNil.js",
+    "./isNullable": "./dist/isNullable.js",
+    "./isOptional": "./dist/isOptional.js",
+    "./hasProp": "./dist/hasProp.js",
+    "./isArray": "./dist/isArray.js",
+    "./isObject": "./dist/isObject.js",
+    "./isInstance": "./dist/isInstance.js",
+    "./isUnionOf": "./dist/isUnionOf.js",
+    "./hasPropOf": "./dist/hasPropOf.js",
+    "./isArrayOf": "./dist/isArrayOf.js",
+    "./isObjectOf": "./dist/isObjectOf.js"
+  },
+  "repository": "https://github.com/arch-mage/type-slim",
+  "author": "arch-mage <m.awad.syahid@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@istanbuljs/esm-loader-hook": "^0.2.0",
+    "@types/tap": "^15.0.7",
+    "@typescript-eslint/eslint-plugin": "^5.42.0",
+    "@typescript-eslint/parser": "^5.42.0",
+    "eslint": "^8.27.0",
+    "eslint-import-resolver-typescript": "^3.5.2",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-tsdoc": "^0.2.17",
+    "tap": "^16.3.0",
+    "typescript": "^4.8.4"
+  },
+  "scripts": {
+    "lint": "eslint src",
+    "test": "tap",
+    "build": "tsc"
+  }
+}
