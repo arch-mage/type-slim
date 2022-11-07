@@ -1,20 +1,21 @@
 {
   "name": "type-slim",
   "type": "module",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A collection of composable type guard functions",
-  "main": "dist/main.js",
   "files": [
     "dist",
     "!dist/**/*.test.*"
   ],
-  "types": "dist",
   "keywords": [
     "schema",
     "typescript",
     "typecheck",
     "validate"
   ],
+  "main": "dist/main.js",
+  "types": "dist/main.d.ts",
+  "module": "dist/main.js",
   "exports": {
     ".": "./dist/main.js",
     "./isBool": "./dist/isBool.js",
@@ -34,6 +35,7 @@
     "./isArrayOf": "./dist/isArrayOf.js",
     "./isObjectOf": "./dist/isObjectOf.js"
   },
+  "sideEffects": false,
   "repository": "https://github.com/arch-mage/type-slim",
   "author": "arch-mage <m.awad.syahid@gmail.com>",
   "license": "MIT",
