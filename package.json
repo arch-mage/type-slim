@@ -1,9 +1,11 @@
 {
   "name": "type-slim",
   "type": "module",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A collection of composable type guard functions",
   "files": [
+    "src",
+    "!src/**/*.test.*",
     "dist",
     "!dist/**/*.test.*"
   ],

@@ -16,7 +16,7 @@
     "declaration": true,
     "declarationMap": true,
     "inlineSourceMap": false,
-    "inlineSources": true,
+    "inlineSources": false,
     "removeComments": false,
     "importHelpers": false,
     "downlevelIteration": true,
