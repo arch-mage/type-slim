@@ -60,6 +60,8 @@
   "scripts": {
     "lint": "eslint src",
     "test": "tap",
-    "build": "tsc"
+    "build": "tsc",
+    "prepare": "rm -rf dist",
+    "prepublishOnly": "tsc"
   }
 }
