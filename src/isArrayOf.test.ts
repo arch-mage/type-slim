@@ -18,6 +18,9 @@ tap.test('isArrayOf', async (tap) => {
   tap.notOk(isArrayOf(isNumber)(fail))
   tap.notOk(isArrayOf(isNumber, fail))
 
+  tap.notOk(isArrayOf(isNumber)([1, '1']))
+  tap.notOk(isArrayOf(isNumber, [1, '1']))
+
   tap.ok(isArrayOf(isNumber)(pass))
   tap.ok(isArrayOf(isNumber, pass))
 
