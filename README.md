@@ -19,6 +19,7 @@ _type-slim is a pure ESM package. You must use `import` to use it._
 
 ```ts
 import {
+  assert,
   isNumber,
   isString,
   isArrayOf,
@@ -75,6 +76,11 @@ if (isPerson(value)) {
 function person(person: Person) {}
 
 function withAge(withAge: WithAge) {}
+
+function withAssert(value: unknown) {
+  assert(isPerson, 'not a person', value)
+  value.id // type safe
+}
 ```
 
 ## functions
@@ -104,4 +110,6 @@ function isMapOf([guard, guard], value)
 function isArrayOf(guard, value)
 function isTupleOf(value)
 function isObjectOf(value)
+
+function assert(guard, error, value)
 ```

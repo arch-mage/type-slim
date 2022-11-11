@@ -38,7 +38,8 @@
     "./hasPropOf": "./dist/hasPropOf.js",
     "./isArrayOf": "./dist/isArrayOf.js",
     "./isTupleOf": "./dist/isTupleOf.js",
-    "./isObjectOf": "./dist/isObjectOf.js"
+    "./isObjectOf": "./dist/isObjectOf.js",
+    "./assert": "./dist/assert.js"
   },
   "sideEffects": false,
   "repository": "https://github.com/arch-mage/type-slim",

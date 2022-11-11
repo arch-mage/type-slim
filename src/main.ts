@@ -22,3 +22,5 @@ export * from './isMapOf.js'
 export * from './isArrayOf.js'
 export * from './isTupleOf.js'
 export * from './isObjectOf.js'
+
+export * from './assert.js'
