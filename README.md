@@ -17,7 +17,7 @@ _type-slim is a pure ESM package. You must use `import` to use it._
 
 ## type guard example
 
-```typescript
+```ts
 import {
   isNumber,
   isString,
@@ -79,7 +79,7 @@ function withAge(withAge: WithAge) {}
 
 ## functions
 
-```typescript
+```ts
 function isBool(value)
 function isNull(value)
 function isNumber(value)
@@ -91,12 +91,16 @@ function isNullable(value)
 function isOptional(value)
 
 function hasProp(prop, value)
-function isArray(array)
+function isSet(value)
+function isMap(value)
+function isArray(value)
 function isObject(value)
 function isInstance(value)
 
 function isUnionOf([...guard], value)
 function hasPropOf(guard, prop, value)
-function isArrayOf(guard, array)
+function isSetOf(guard, value)
+function isMapOf([guard, guard], value)
+function isArrayOf(guard, value)
 function isObjectOf(value)
 ```
