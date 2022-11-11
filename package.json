@@ -37,6 +37,7 @@
     "./isUnionOf": "./dist/isUnionOf.js",
     "./hasPropOf": "./dist/hasPropOf.js",
     "./isArrayOf": "./dist/isArrayOf.js",
+    "./isTupleOf": "./dist/isTupleOf.js",
     "./isObjectOf": "./dist/isObjectOf.js"
   },
   "sideEffects": false,

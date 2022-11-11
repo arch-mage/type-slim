@@ -102,5 +102,6 @@ function hasPropOf(guard, prop, value)
 function isSetOf(guard, value)
 function isMapOf([guard, guard], value)
 function isArrayOf(guard, value)
+function isTupleOf(value)
 function isObjectOf(value)
 ```
