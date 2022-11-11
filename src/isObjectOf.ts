@@ -78,17 +78,8 @@ export function isObjectOf<
       ? (value: unknown) => value is R
       : never
   }
->(
-  shape: T,
-  value?: unknown
-):
-  | unknown
-  | ((value: unknown) => value is {
-      [K in keyof T]: T[K] extends (value: unknown) => value is infer R
-        ? R
-        : never
-    }) {
-  if (arguments.length === 2) {
+>(shape: T, value?: unknown): unknown {
+  function guard(value: unknown) {
     if (!isObject(value)) {
       return false
     }
@@ -104,22 +95,12 @@ export function isObjectOf<
     return true
   }
 
+  if (arguments.length === 2) {
+    return guard(value)
+  }
+
   if (arguments.length === 1) {
-    return (value: unknown) => {
-      if (!isObject(value)) {
-        return false
-      }
-
-      for (const [key, pred] of Object.entries<(value: unknown) => boolean>(
-        shape
-      )) {
-        if (!pred(value[key])) {
-          return false
-        }
-      }
-
-      return true
-    }
+    return guard
   }
 
   throw new TypeError('invalid number of arguments')
