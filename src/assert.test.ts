@@ -31,5 +31,5 @@ tap.test('assert', async (tap) => {
     )
     assertIsDate(value)
     value.getTime()
-  }, TypeError('not date'))
+  }, TypeError('not a date'))
 })

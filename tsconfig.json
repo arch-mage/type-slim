@@ -27,8 +27,8 @@
     "preserveValueImports": false,
 
     "isolatedModules": true,
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": false,
+    "esModuleInterop": false,
     "preserveSymlinks": true,
     "forceConsistentCasingInFileNames": true,
 
