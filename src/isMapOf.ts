@@ -42,24 +42,25 @@ export function isMapOf<K, V>(
   value: unknown
 ): value is Map<K, V>
 export function isMapOf<K, V>(
-  pred: [(elem: unknown) => elem is K, (elem: unknown) => elem is V],
-  value?: unknown
+  ...args:
+    | [[(elem: unknown) => elem is K, (elem: unknown) => elem is V]]
+    | [[(elem: unknown) => elem is K, (elem: unknown) => elem is V], unknown]
 ): unknown {
   function guard(value: unknown) {
     if (!(value instanceof Map)) {
       return false
     }
     for (const item of value) {
-      if (!pred[0](item[0]) || !pred[1](item[1])) {
+      if (!args[0][0](item[0]) || !args[0][1](item[1])) {
         return false
       }
     }
     return true
   }
-  if (arguments.length === 2) {
-    return guard(value)
+  if (args.length === 2) {
+    return guard(args[1])
   }
-  if (arguments.length === 1) {
+  if (args.length === 1) {
     return guard
   }
   throw new TypeError('invalid number of arguments')

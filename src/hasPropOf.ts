@@ -59,27 +59,21 @@ export function hasPropOf<T, P extends string | number | symbol>(
   value: unknown
 ): value is { [K in P]: T }
 export function hasPropOf<T, P extends string | number | symbol>(
-  pred: (prop: unknown) => prop is T,
-  prop?: P,
-  value?: unknown
-):
-  | boolean
-  | ((value: unknown) => unknown)
-  | (<P extends string | number | symbol>(prop: P, value: unknown) => unknown)
-  | (<P extends string | number | symbol>(
-      prop: P
-    ) => (value: unknown) => unknown) {
-  if (arguments.length === 3) {
-    return hasProp(prop as P, value) && pred(value[prop as P])
+  ...args:
+    | [(prop: unknown) => prop is T]
+    | [(prop: unknown) => prop is T, P]
+    | [(prop: unknown) => prop is T, P, unknown]
+): unknown {
+  if (args.length === 3) {
+    return hasProp(args[1], args[2]) && args[0](args[2][args[1]])
   }
-  if (arguments.length === 2) {
+  if (args.length === 2) {
     return (value: unknown) =>
-      hasProp(prop as P, value) && pred(value[prop as P])
+      hasProp(args[1], value) && args[0](value[args[1]])
   }
-  if (arguments.length === 1) {
-    return <P extends string | number | symbol>(prop: P) =>
-      (value: unknown) =>
-        hasProp(prop as P, value) && pred(value[prop as P])
+  if (args.length === 1) {
+    return (prop: P) => (value: unknown) =>
+      hasProp(prop, value) && args[0](value[prop])
   }
   throw new TypeError('invalid number of arguments')
 }

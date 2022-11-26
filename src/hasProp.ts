@@ -46,14 +46,13 @@ export function hasProp<P extends string | number | symbol>(
   value: unknown
 ): value is { [K in P]: unknown }
 export function hasProp<P extends string | number | symbol>(
-  prop: P,
-  value?: unknown
+  ...args: [P] | [P, unknown]
 ): boolean | ((value: unknown) => boolean) {
-  if (arguments.length === 2) {
-    return isObject(value) && prop in value
+  if (args.length === 2) {
+    return isObject(args[1]) && args[0] in args[1]
   }
-  if (arguments.length === 1) {
-    return (value: unknown) => isObject(value) && prop in value
+  if (args.length === 1) {
+    return (value: unknown) => isObject(value) && args[0] in value
   }
   throw new TypeError('invalid number of arguments')
 }

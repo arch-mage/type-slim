@@ -19,9 +19,9 @@ tap.test('assert', async (tap) => {
 
   tap.throws(() => {
     const value: unknown = null
-    assert(isInstance(Date), 'not date', value)
+    assert(isInstance(Date), 'not a date', value)
     value.getTime()
-  }, TypeError('not date'))
+  }, TypeError('not a date'))
 
   tap.throws(() => {
     const value: unknown = null

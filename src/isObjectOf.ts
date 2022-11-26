@@ -78,15 +78,14 @@ export function isObjectOf<
       ? (value: unknown) => value is R
       : never
   }
->(shape: T, value?: unknown): unknown {
+>(...args: [T] | [T, unknown]): unknown {
   function guard(value: unknown) {
     if (!isObject(value)) {
       return false
     }
 
-    for (const [key, pred] of Object.entries<(value: unknown) => boolean>(
-      shape
-    )) {
+    const entries = Object.entries<(value: unknown) => boolean>(args[0])
+    for (const [key, pred] of entries) {
       if (!pred(value[key])) {
         return false
       }
@@ -95,11 +94,11 @@ export function isObjectOf<
     return true
   }
 
-  if (arguments.length === 2) {
-    return guard(value)
+  if (args.length === 2) {
+    return guard(args[1])
   }
 
-  if (arguments.length === 1) {
+  if (args.length === 1) {
     return guard
   }
 

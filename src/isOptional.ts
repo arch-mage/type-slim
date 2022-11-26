@@ -17,14 +17,15 @@ export function isOptional<T>(
   value: unknown
 ): value is T | undefined
 export function isOptional<T>(
-  pred: (value: unknown) => value is T,
-  value?: unknown
+  ...args:
+    | [(value: unknown) => value is T]
+    | [(value: unknown) => value is T, unknown]
 ): boolean | ((value: unknown) => boolean) {
-  if (arguments.length === 2) {
-    return typeof value === 'undefined' || pred(value)
+  if (args.length === 2) {
+    return typeof args[1] === 'undefined' || args[0](args[1])
   }
-  if (arguments.length === 1) {
-    return (value: unknown) => typeof value === 'undefined' || pred(value)
+  if (args.length === 1) {
+    return (value: unknown) => typeof value === 'undefined' || args[0](value)
   }
   throw new TypeError('invalid number of arguments')
 }

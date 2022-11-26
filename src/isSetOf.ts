@@ -38,24 +38,25 @@ export function isSetOf<T>(
   value: unknown
 ): value is Set<T>
 export function isSetOf<T>(
-  pred: (elem: unknown) => elem is T,
-  value?: unknown
+  ...args:
+    | [(elem: unknown) => elem is T]
+    | [(elem: unknown) => elem is T, unknown]
 ): unknown {
   function guard(value: unknown) {
     if (!(value instanceof Set)) {
       return false
     }
     for (const item of value) {
-      if (!pred(item)) {
+      if (!args[0](item)) {
         return false
       }
     }
     return true
   }
-  if (arguments.length === 2) {
-    return guard(value)
+  if (args.length === 2) {
+    return guard(args[1])
   }
-  if (arguments.length === 1) {
+  if (args.length === 1) {
     return guard
   }
   throw new TypeError('invalid number of arguments')

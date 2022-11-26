@@ -27,11 +27,6 @@ export function assert<T>(
   pred: (value: unknown) => value is T,
   error: Error | string
 ): (value: unknown) => asserts value is T
-export function assert<T>(
-  pred: (value: unknown) => value is T,
-  error: Error | string,
-  value: unknown
-): asserts value is T
 /**
  * Asserts that value is a type of `T`.
  *
@@ -49,21 +44,25 @@ export function assert<T>(
 export function assert<T>(
   pred: (value: unknown) => value is T,
   error: Error | string,
-  value?: unknown
+  value: unknown
+): asserts value is T
+export function assert<T>(
+  ...args:
+    | [(value: unknown) => value is T, Error | string]
+    | [(value: unknown) => value is T, Error | string, unknown]
 ): unknown {
-  const err = typeof error === 'string' ? new TypeError(error) : error
-
+  const err = typeof args[1] === 'string' ? new TypeError(args[1]) : args[1]
   function guard(value: unknown) {
-    if (!pred(value)) {
+    if (!args[0](value)) {
       throw err
     }
   }
 
-  if (arguments.length === 3) {
-    return guard(value)
+  if (args.length === 3) {
+    return guard(args[2])
   }
 
-  if (arguments.length === 2) {
+  if (args.length === 2) {
     return guard
   }
 

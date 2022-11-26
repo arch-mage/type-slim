@@ -54,12 +54,15 @@ export function isUnionOf<
   : never
 export function isUnionOf<
   U extends ReadonlyArray<(value: unknown) => value is unknown>
->(guards: U, value?: unknown): unknown {
-  if (arguments.length === 2) {
-    return guards.some((guard) => guard(value))
+>(...args: [U] | [U, unknown]): unknown {
+  function guard(value: unknown) {
+    return args[0].some((guard) => guard(value))
   }
-  if (arguments.length === 1) {
-    return (value: unknown) => guards.some((guard) => guard(value))
+  if (args.length === 2) {
+    return guard(args[1])
+  }
+  if (args.length === 1) {
+    return guard
   }
   throw new TypeError('invalid number of arguments')
 }

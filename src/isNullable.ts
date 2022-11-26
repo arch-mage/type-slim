@@ -17,14 +17,15 @@ export function isNullable<T>(
   value: unknown
 ): value is T | null
 export function isNullable<T>(
-  pred: (value: unknown) => value is T,
-  value?: unknown
+  ...args:
+    | [(value: unknown) => value is T]
+    | [(value: unknown) => value is T, unknown]
 ): boolean | ((value: unknown) => boolean) {
-  if (arguments.length === 2) {
-    return value === null || pred(value)
+  if (args.length === 2) {
+    return args[1] === null || args[0](args[1])
   }
-  if (arguments.length === 1) {
-    return (value: unknown) => value === null || pred(value)
+  if (args.length === 1) {
+    return (value: unknown) => value === null || args[0](value)
   }
   throw new TypeError('invalid number of arguments')
 }

@@ -37,14 +37,13 @@ export function isInstance<C extends new (...args: unknown[]) => unknown>(
   value: unknown
 ): value is InstanceType<C>
 export function isInstance<C extends new (...args: unknown[]) => unknown>(
-  cls: C,
-  value?: unknown
-): unknown | ((value: unknown) => unknown) {
-  if (arguments.length === 2) {
-    return value instanceof cls
+  ...args: [C] | [C, unknown]
+): unknown {
+  if (args.length === 2) {
+    return args[1] instanceof args[0]
   }
-  if (arguments.length === 1) {
-    return (value: unknown) => value instanceof cls
+  if (args.length === 1) {
+    return (value: unknown) => value instanceof args[0]
   }
   throw new TypeError('invalid number of arguments')
 }

@@ -36,14 +36,15 @@ export function isArrayOf<T>(
   value: unknown
 ): value is T[]
 export function isArrayOf<T>(
-  pred: (elem: unknown) => elem is T,
-  value?: unknown
+  ...args:
+    | [(elem: unknown) => elem is T]
+    | [(elem: unknown) => elem is T, unknown]
 ): unknown | ((value: unknown) => value is T[]) {
-  if (arguments.length === 2) {
-    return Array.isArray(value) && value.every(pred)
+  if (args.length === 2) {
+    return Array.isArray(args[1]) && args[1].every(args[0])
   }
-  if (arguments.length === 1) {
-    return (value: unknown) => Array.isArray(value) && value.every(pred)
+  if (args.length === 1) {
+    return (value: unknown) => Array.isArray(value) && value.every(args[0])
   }
   throw new TypeError('invalid number of arguments')
 }

@@ -53,18 +53,18 @@ export function isTupleOf<
 }
 export function isTupleOf<
   T extends ReadonlyArray<(value: unknown) => value is unknown>
->(tuple: T, value?: unknown): unknown {
+>(...args: [T] | [T, unknown]): unknown {
   function guard(value: unknown) {
     if (!Array.isArray(value)) {
       return false
     }
 
-    if (tuple.length !== value.length) {
+    if (args[0].length !== value.length) {
       return false
     }
 
-    for (let i = 0; i < tuple.length; ++i) {
-      if (!tuple[i](value[i])) {
+    for (let i = 0; i < args[0].length; ++i) {
+      if (!args[0][i](value[i])) {
         return false
       }
     }
@@ -72,10 +72,10 @@ export function isTupleOf<
     return true
   }
 
-  if (arguments.length === 2) {
-    return guard(value)
+  if (args.length === 2) {
+    return guard(args[1])
   }
-  if (arguments.length === 1) {
+  if (args.length === 1) {
     return guard
   }
   throw new TypeError('invalid number of arguments')
