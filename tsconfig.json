@@ -55,8 +55,7 @@
     "allowUnreachableCode": false,
 
     "skipDefaultLibCheck": true,
-    "skipLibCheck": true,
-    "suppressImplicitAnyIndexErrors": true
+    "skipLibCheck": true
   },
   "include": ["src"],
   "typedocOptions": {

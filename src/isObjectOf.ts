@@ -86,7 +86,8 @@ export function isObjectOf<
 
     const entries = Object.entries<(value: unknown) => boolean>(args[0])
     for (const [key, pred] of entries) {
-      if (!pred(value[key])) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      if (!pred((value as any)[key as any])) {
         return false
       }
     }
