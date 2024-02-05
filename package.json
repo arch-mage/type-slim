@@ -1,7 +1,7 @@
 {
   "name": "type-slim",
   "type": "module",
-  "version": "1.0.8",
+  "version": "1.1.0",
   "description": "A collection of composable type guard functions",
   "files": [
     "dist",
@@ -38,6 +38,7 @@
     "./hasPropOf": "./dist/hasPropOf.js",
     "./isArrayOf": "./dist/isArrayOf.js",
     "./isTupleOf": "./dist/isTupleOf.js",
+    "./isRecordOf": "./dist/isRecordOf.js",
     "./isObjectOf": "./dist/isObjectOf.js",
     "./assert": "./dist/assert.js"
   },

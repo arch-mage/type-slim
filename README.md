@@ -109,6 +109,7 @@ function isSetOf(guard, value)
 function isMapOf([guard, guard], value)
 function isArrayOf(guard, value)
 function isTupleOf(value)
+function isRecordOf(value)
 function isObjectOf(value)
 
 function assert(guard, error, value)
