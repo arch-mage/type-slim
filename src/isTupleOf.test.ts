@@ -1,34 +1,32 @@
-import tap from 'tap'
+import { expect, test } from 'vitest'
 import { isArrayOf } from './isArrayOf.js'
 import { isNumber } from './isNumber.js'
 import { isTupleOf } from './isTupleOf.js'
 import { isString } from './isString.js'
 
-tap.test('isTupleOf', async (tap) => {
+test('isTupleOf', () => {
   const pass = ['name', 0, ['a', 'b']] as const
 
   const tuple = [isString, isNumber, isArrayOf(isString)] as const
 
-  tap.throws(
-    () => (isTupleOf as any)(),
+  expect(() => (isTupleOf as any)()).toThrowError(
     TypeError('invalid number of arguments')
   )
-  tap.throws(
-    () => (isTupleOf as any)(1, 2, 3),
+  expect(() => (isTupleOf as any)(1, 2, 3)).toThrowError(
     TypeError('invalid number of arguments')
   )
 
-  tap.notOk(isTupleOf(tuple, null))
-  tap.notOk(isTupleOf(tuple, []))
-  tap.notOk(isTupleOf(tuple, {}))
-  tap.notOk(isTupleOf(tuple, ['name', '0', ['a', 'b']]))
-  tap.ok(isTupleOf(tuple, pass))
+  expect(isTupleOf(tuple, null)).toBeFalsy()
+  expect(isTupleOf(tuple, [])).toBeFalsy()
+  expect(isTupleOf(tuple, {})).toBeFalsy()
+  expect(isTupleOf(tuple, ['name', '0', ['a', 'b']])).toBeFalsy()
+  expect(isTupleOf(tuple, pass)).toBeTruthy()
 
-  tap.notOk(isTupleOf(tuple)(null))
-  tap.notOk(isTupleOf(tuple)([]))
-  tap.notOk(isTupleOf(tuple)({}))
-  tap.notOk(isTupleOf(tuple)(['name', '0', ['a', 'b']]))
-  tap.ok(isTupleOf(tuple)(pass))
+  expect(isTupleOf(tuple)(null)).toBeFalsy()
+  expect(isTupleOf(tuple)([])).toBeFalsy()
+  expect(isTupleOf(tuple)({})).toBeFalsy()
+  expect(isTupleOf(tuple)(['name', '0', ['a', 'b']])).toBeFalsy()
+  expect(isTupleOf(tuple)(pass)).toBeTruthy()
 
   const something: unknown = null
   if (isTupleOf(tuple, something)) {

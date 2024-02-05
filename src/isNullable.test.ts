@@ -1,28 +1,28 @@
-import tap from 'tap'
+import { expect, test } from 'vitest'
 import { isNullable } from './isNullable.js'
 import { isNumber } from './isNumber.js'
 
-tap.test('isNumber', async (tap) => {
-  tap.throws(() => (isNullable as any)(), 'no arg')
-  tap.throws(() => (isNullable as any)(1, 2, 3), 'no arg')
+test('isNumber', async () => {
+  expect(() => (isNullable as any)(), 'no arg').toThrow()
+  expect(() => (isNullable as any)(1, 2, 3), 'no arg').toThrow()
 
-  tap.ok(isNullable(isNumber, 1), 'number')
-  tap.ok(isNullable(isNumber, null), 'null')
-  tap.notOk(isNullable(isNumber, ''), 'string')
-  tap.notOk(isNullable(isNumber, {}), 'object')
-  tap.notOk(isNullable(isNumber, undefined), 'undefined')
-  tap.notOk(isNullable(isNumber, []), 'array')
-  tap.notOk(isNullable(isNumber, true), 'boolean')
-  tap.notOk(isNullable(isNumber, NaN), 'NaN')
+  expect(isNullable(isNumber, 1), 'number').toBeTruthy()
+  expect(isNullable(isNumber, null), 'null').toBeTruthy()
+  expect(isNullable(isNumber, ''), 'string').toBeFalsy()
+  expect(isNullable(isNumber, {}), 'object').toBeFalsy()
+  expect(isNullable(isNumber, undefined), 'undefined').toBeFalsy()
+  expect(isNullable(isNumber, []), 'array').toBeFalsy()
+  expect(isNullable(isNumber, true), 'boolean').toBeFalsy()
+  expect(isNullable(isNumber, NaN), 'NaN').toBeFalsy()
 
-  tap.ok(isNullable(isNumber)(1), 'number')
-  tap.ok(isNullable(isNumber)(null), 'null')
-  tap.notOk(isNullable(isNumber)(''), 'string')
-  tap.notOk(isNullable(isNumber)({}), 'object')
-  tap.notOk(isNullable(isNumber)(undefined), 'undefined')
-  tap.notOk(isNullable(isNumber)([]), 'array')
-  tap.notOk(isNullable(isNumber)(true), 'boolean')
-  tap.notOk(isNullable(isNumber)(NaN), 'NaN')
+  expect(isNullable(isNumber)(1), 'number').toBeTruthy()
+  expect(isNullable(isNumber)(null), 'null').toBeTruthy()
+  expect(isNullable(isNumber)(''), 'string').toBeFalsy()
+  expect(isNullable(isNumber)({}), 'object').toBeFalsy()
+  expect(isNullable(isNumber)(undefined), 'undefined').toBeFalsy()
+  expect(isNullable(isNumber)([]), 'array').toBeFalsy()
+  expect(isNullable(isNumber)(true), 'boolean').toBeFalsy()
+  expect(isNullable(isNumber)(NaN), 'NaN').toBeFalsy()
 
   const something: unknown = null
   if (isNumber(something)) {

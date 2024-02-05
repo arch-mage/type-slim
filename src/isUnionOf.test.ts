@@ -1,34 +1,32 @@
-import tap from 'tap'
+import { expect, test } from 'vitest'
 import { isBool } from './isBool.js'
 import { isNumber } from './isNumber.js'
 import { isString } from './isString.js'
 import { isUnionOf } from './isUnionOf.js'
 
-tap.test('isUnionOf', async (tap) => {
-  tap.throws(
-    () => (isUnionOf as any)(),
+test('isUnionOf', () => {
+  expect(() => (isUnionOf as any)()).toThrowError(
     TypeError('invalid number of arguments')
   )
-  tap.throws(
-    () => (isUnionOf as any)(1, 2, 3),
+  expect(() => (isUnionOf as any)(1, 2, 3)).toThrowError(
     TypeError('invalid number of arguments')
   )
 
-  tap.notOk(isUnionOf([isString, isNumber, isBool], []))
-  tap.notOk(isUnionOf([isString, isNumber, isBool], {}))
-  tap.notOk(isUnionOf([isString, isNumber, isBool], NaN))
-  tap.notOk(isUnionOf([isString, isNumber, isBool], null))
-  tap.notOk(isUnionOf([isString, isNumber, isBool], undefined))
+  expect(isUnionOf([isString, isNumber, isBool], [])).toBeFalsy()
+  expect(isUnionOf([isString, isNumber, isBool], {})).toBeFalsy()
+  expect(isUnionOf([isString, isNumber, isBool], NaN)).toBeFalsy()
+  expect(isUnionOf([isString, isNumber, isBool], null)).toBeFalsy()
+  expect(isUnionOf([isString, isNumber, isBool], undefined)).toBeFalsy()
 
-  tap.ok(isUnionOf([isString, isNumber, isBool], '1'))
-  tap.ok(isUnionOf([isString, isNumber, isBool], 1))
-  tap.ok(isUnionOf([isString, isNumber, isBool], true))
-  tap.ok(isUnionOf([isString, isNumber, isBool], false))
+  expect(isUnionOf([isString, isNumber, isBool], '1')).toBeTruthy()
+  expect(isUnionOf([isString, isNumber, isBool], 1)).toBeTruthy()
+  expect(isUnionOf([isString, isNumber, isBool], true)).toBeTruthy()
+  expect(isUnionOf([isString, isNumber, isBool], false)).toBeTruthy()
 
-  tap.ok(isUnionOf([isString, isNumber, isBool])('1'))
-  tap.ok(isUnionOf([isString, isNumber, isBool])(1))
-  tap.ok(isUnionOf([isString, isNumber, isBool])(true))
-  tap.ok(isUnionOf([isString, isNumber, isBool])(false))
+  expect(isUnionOf([isString, isNumber, isBool])('1')).toBeTruthy()
+  expect(isUnionOf([isString, isNumber, isBool])(1)).toBeTruthy()
+  expect(isUnionOf([isString, isNumber, isBool])(true)).toBeTruthy()
+  expect(isUnionOf([isString, isNumber, isBool])(false)).toBeTruthy()
 
   const something: unknown = null
 

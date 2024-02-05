@@ -1,28 +1,26 @@
-import tap from 'tap'
+import { expect, test } from 'vitest'
 import { isArrayOf } from './isArrayOf.js'
 import { isNumber } from './isNumber.js'
 
-tap.test('isArrayOf', async (tap) => {
+test('isArrayOf', () => {
   const fail: unknown = null
   const pass = [1, 2, 3]
 
-  tap.throws(
-    () => (isArrayOf as any)(),
+  expect(() => (isArrayOf as any)()).toThrowError(
     TypeError('invalid number of arguments')
   )
-  tap.throws(
-    () => (isArrayOf as any)(1, 2, 3),
+  expect(() => (isArrayOf as any)(1, 2, 3)).toThrowError(
     TypeError('invalid number of arguments')
   )
 
-  tap.notOk(isArrayOf(isNumber)(fail))
-  tap.notOk(isArrayOf(isNumber, fail))
+  expect(isArrayOf(isNumber)(fail)).toBeFalsy()
+  expect(isArrayOf(isNumber, fail)).toBeFalsy()
 
-  tap.notOk(isArrayOf(isNumber)([1, '1']))
-  tap.notOk(isArrayOf(isNumber, [1, '1']))
+  expect(isArrayOf(isNumber)([1, '1'])).toBeFalsy()
+  expect(isArrayOf(isNumber, [1, '1'])).toBeFalsy()
 
-  tap.ok(isArrayOf(isNumber)(pass))
-  tap.ok(isArrayOf(isNumber, pass))
+  expect(isArrayOf(isNumber)(pass)).toBeTruthy()
+  expect(isArrayOf(isNumber, pass)).toBeTruthy()
 
   if (isArrayOf(isNumber, fail)) {
     fail.at(0)?.toFixed(2)

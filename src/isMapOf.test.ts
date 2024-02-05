@@ -1,33 +1,34 @@
-import tap from 'tap'
+import { expect, test } from 'vitest'
 import { isMapOf } from './isMapOf.js'
 import { isNumber } from './isNumber.js'
 import { isString } from './isString.js'
 
-tap.test('isMapOf', async (tap) => {
+test('isMapOf', () => {
   const fail: unknown = null
   const pass = new Map([
     ['1', 1],
     ['2', 2],
   ])
 
-  tap.throws(() => (isMapOf as any)(), TypeError('invalid number of arguments'))
-  tap.throws(
-    () => (isMapOf as any)(1, 2, 3),
+  expect(() => (isMapOf as any)()).toThrowError(
+    TypeError('invalid number of arguments')
+  )
+  expect(() => (isMapOf as any)(1, 2, 3)).toThrowError(
     TypeError('invalid number of arguments')
   )
 
-  tap.notOk(isMapOf([isString, isNumber])(fail))
-  tap.notOk(isMapOf([isString, isNumber], fail))
+  expect(isMapOf([isString, isNumber])(fail)).toBeFalsy()
+  expect(isMapOf([isString, isNumber], fail)).toBeFalsy()
 
-  tap.notOk(
+  expect(
     isMapOf([isString, isNumber])(
       new Map<any, any>([
         ['1', 1],
         [2, '2'],
       ])
     )
-  )
-  tap.notOk(
+  ).toBeFalsy()
+  expect(
     isMapOf(
       [isString, isNumber],
       new Map<any, any>([
@@ -35,10 +36,10 @@ tap.test('isMapOf', async (tap) => {
         [2, '2'],
       ])
     )
-  )
+  ).toBeFalsy()
 
-  tap.ok(isMapOf([isString, isNumber])(pass))
-  tap.ok(isMapOf([isString, isNumber], pass))
+  expect(isMapOf([isString, isNumber])(pass)).toBeTruthy()
+  expect(isMapOf([isString, isNumber], pass)).toBeTruthy()
 
   if (isMapOf([isString, isNumber], fail)) {
     const spread = [...fail]

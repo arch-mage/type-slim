@@ -1,13 +1,13 @@
-import tap from 'tap'
+import { expect, test } from 'vitest'
 import { isArray } from './isArray.js'
 
-tap.test('isArray', async (tap) => {
-  tap.ok(isArray([]), 'array')
-  tap.notOk((isArray as any)(), 'no arg')
-  tap.notOk(isArray(undefined), 'undefined')
-  tap.notOk(isArray(null), 'null')
-  tap.notOk(isArray({}), 'object')
-  tap.notOk(isArray(''), 'string')
-  tap.notOk(isArray(1), 'number')
-  tap.notOk(isArray(true), 'boolean')
+test('isArray', async () => {
+  expect(isArray([]), 'array').toBeTruthy()
+  expect((isArray as any)(), 'no arg').toBeFalsy()
+  expect(isArray(undefined), 'undefined').toBeFalsy()
+  expect(isArray(null), 'null').toBeFalsy()
+  expect(isArray({}), 'object').toBeFalsy()
+  expect(isArray(''), 'string').toBeFalsy()
+  expect(isArray(1), 'number').toBeFalsy()
+  expect(isArray(true), 'boolean').toBeFalsy()
 })

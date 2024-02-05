@@ -1,14 +1,14 @@
-import tap from 'tap'
+import { expect, test } from 'vitest'
 import { isMap } from './isMap.js'
 
-tap.test('isMap', async (tap) => {
-  tap.ok(isMap(new Map()), 'map')
-  tap.notOk((isMap as any)(), 'no arg')
-  tap.notOk(isMap(undefined), 'undefined')
-  tap.notOk(isMap(null), 'null')
-  tap.notOk(isMap({}), 'object')
-  tap.notOk(isMap([]), 'array')
-  tap.notOk(isMap(''), 'string')
-  tap.notOk(isMap(1), 'number')
-  tap.notOk(isMap(true), 'boolean')
+test('isMap', () => {
+  expect(isMap(new Map()), 'map').toBeTruthy()
+  expect((isMap as any)(), 'no arg').toBeFalsy()
+  expect(isMap(undefined), 'undefined').toBeFalsy()
+  expect(isMap(null), 'null').toBeFalsy()
+  expect(isMap({}), 'object').toBeFalsy()
+  expect(isMap([]), 'array').toBeFalsy()
+  expect(isMap(''), 'string').toBeFalsy()
+  expect(isMap(1), 'number').toBeFalsy()
+  expect(isMap(true), 'boolean').toBeFalsy()
 })

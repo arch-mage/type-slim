@@ -1,27 +1,25 @@
-import tap from 'tap'
+import { expect, test } from 'vitest'
 import { isInstance } from './isInstance.js'
 
-tap.test('isInstanceOf', async (tap) => {
+test('isInstanceOf', () => {
   const value: unknown = null
 
-  tap.throws(
-    () => (isInstance as any)(),
+  expect(() => (isInstance as any)()).toThrowError(
     TypeError('invalid number of arguments')
   )
-  tap.throws(
-    () => (isInstance as any)(1, 2, 3),
+  expect(() => (isInstance as any)(1, 2, 3)).toThrowError(
     TypeError('invalid number of arguments')
   )
 
-  tap.notOk(isInstance(Date, value))
-  tap.notOk(isInstance(Date, {}))
-  tap.notOk(isInstance(Date, []))
-  tap.notOk(isInstance(Date, true))
-  tap.notOk(isInstance(Date, ''))
-  tap.notOk(isInstance(Date, 1))
-  tap.notOk(isInstance(Date, null))
-  tap.notOk(isInstance(Date, undefined))
-  tap.ok(isInstance(Date, new Date()))
+  expect(isInstance(Date, value)).toBeFalsy()
+  expect(isInstance(Date, {})).toBeFalsy()
+  expect(isInstance(Date, [])).toBeFalsy()
+  expect(isInstance(Date, true)).toBeFalsy()
+  expect(isInstance(Date, '')).toBeFalsy()
+  expect(isInstance(Date, 1)).toBeFalsy()
+  expect(isInstance(Date, null)).toBeFalsy()
+  expect(isInstance(Date, undefined)).toBeFalsy()
+  expect(isInstance(Date, new Date())).toBeTruthy()
 
   if (isInstance(Date, value)) {
     value.getTime()

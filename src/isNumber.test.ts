@@ -1,16 +1,16 @@
-import tap from 'tap'
+import { expect, test } from 'vitest'
 import { isNumber } from './isNumber.js'
 
-tap.test('isNumber', async (tap) => {
-  tap.ok(isNumber(1), 'number')
-  tap.notOk((isNumber as any)(), 'no arg')
-  tap.notOk(isNumber(''), 'string')
-  tap.notOk(isNumber({}), 'object')
-  tap.notOk(isNumber(undefined), 'undefined')
-  tap.notOk(isNumber(null), 'null')
-  tap.notOk(isNumber([]), 'array')
-  tap.notOk(isNumber(true), 'boolean')
-  tap.notOk(isNumber(NaN), 'NaN')
+test('isNumber', () => {
+  expect(isNumber(1), 'number').toBeTruthy()
+  expect((isNumber as any)(), 'no arg').toBeFalsy()
+  expect(isNumber(''), 'string').toBeFalsy()
+  expect(isNumber({}), 'object').toBeFalsy()
+  expect(isNumber(undefined), 'undefined').toBeFalsy()
+  expect(isNumber(null), 'null').toBeFalsy()
+  expect(isNumber([]), 'array').toBeFalsy()
+  expect(isNumber(true), 'boolean').toBeFalsy()
+  expect(isNumber(NaN), 'NaN').toBeFalsy()
 
   const something: unknown = null
   if (isNumber(something)) {

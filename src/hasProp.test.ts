@@ -1,21 +1,22 @@
-import tap from 'tap'
+import { expect, test } from 'vitest'
 import { hasProp } from './hasProp.js'
 
-tap.test('hasProp', async (tap) => {
+test('hasProp', () => {
   const value: unknown = null
 
-  tap.throws(() => (hasProp as any)(), TypeError('invalid number of arguments'))
-  tap.throws(
-    () => (hasProp as any)(1, 2, 3),
+  expect(() => (hasProp as any)()).toThrowError(
+    TypeError('invalid number of arguments')
+  )
+  expect(() => (hasProp as any)(1, 2, 3)).toThrowError(
     TypeError('invalid number of arguments')
   )
 
-  tap.notOk(hasProp('name')(value))
-  tap.notOk(hasProp('name', value))
-  tap.notOk(hasProp('length', []))
+  expect(hasProp('name')(value)).toBeFalsy()
+  expect(hasProp('name', value)).toBeFalsy()
+  expect(hasProp('length', [])).toBeFalsy()
 
-  tap.ok(hasProp('name')({ name: 'name' }))
-  tap.ok(hasProp('name', { name: 'name' }))
+  expect(hasProp('name')({ name: 'name' })).toBeTruthy()
+  expect(hasProp('name', { name: 'name' })).toBeTruthy()
 
   if (hasProp('name', value)) {
     value.name

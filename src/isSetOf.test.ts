@@ -1,25 +1,26 @@
-import tap from 'tap'
+import { expect, test } from 'vitest'
 import { isSetOf } from './isSetOf.js'
 import { isNumber } from './isNumber.js'
 
-tap.test('isSetOf', async (tap) => {
+test('isSetOf', () => {
   const fail: unknown = null
   const pass = new Set([1, 2, 3])
 
-  tap.throws(() => (isSetOf as any)(), TypeError('invalid number of arguments'))
-  tap.throws(
-    () => (isSetOf as any)(1, 2, 3),
+  expect(() => (isSetOf as any)()).toThrowError(
+    TypeError('invalid number of arguments')
+  )
+  expect(() => (isSetOf as any)(1, 2, 3)).toThrowError(
     TypeError('invalid number of arguments')
   )
 
-  tap.notOk(isSetOf(isNumber)(fail))
-  tap.notOk(isSetOf(isNumber, fail))
+  expect(isSetOf(isNumber)(fail)).toBeFalsy()
+  expect(isSetOf(isNumber, fail)).toBeFalsy()
 
-  tap.notOk(isSetOf(isNumber)(new Set([1, '1'])))
-  tap.notOk(isSetOf(isNumber, new Set([1, '1'])))
+  expect(isSetOf(isNumber)(new Set([1, '1']))).toBeFalsy()
+  expect(isSetOf(isNumber, new Set([1, '1']))).toBeFalsy()
 
-  tap.ok(isSetOf(isNumber)(pass))
-  tap.ok(isSetOf(isNumber, pass))
+  expect(isSetOf(isNumber)(pass)).toBeTruthy()
+  expect(isSetOf(isNumber, pass)).toBeTruthy()
 
   if (isSetOf(isNumber, fail)) {
     const spread = [...fail]

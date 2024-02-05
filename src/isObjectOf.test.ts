@@ -1,10 +1,10 @@
-import tap from 'tap'
+import { expect, test } from 'vitest'
 import { isArrayOf } from './isArrayOf.js'
 import { isNumber } from './isNumber.js'
 import { isObjectOf } from './isObjectOf.js'
 import { isString } from './isString.js'
 
-tap.test('isObjectOf', async (tap) => {
+test('isObjectOf', () => {
   const pass = {
     name: 'name',
     age: 0,
@@ -17,26 +17,24 @@ tap.test('isObjectOf', async (tap) => {
     address: isArrayOf(isString),
   }
 
-  tap.throws(
-    () => (isObjectOf as any)(),
+  expect(() => (isObjectOf as any)()).toThrowError(
     TypeError('invalid number of arguments')
   )
-  tap.throws(
-    () => (isObjectOf as any)(1, 2, 3),
+  expect(() => (isObjectOf as any)(1, 2, 3)).toThrowError(
     TypeError('invalid number of arguments')
   )
 
-  tap.notOk(isObjectOf(shape, null))
-  tap.notOk(isObjectOf(shape, []))
-  tap.notOk(isObjectOf(shape, {}))
-  tap.notOk(isObjectOf(shape, { name: 'name', age: '0' }))
-  tap.ok(isObjectOf(shape, pass))
+  expect(isObjectOf(shape, null)).toBeFalsy()
+  expect(isObjectOf(shape, [])).toBeFalsy()
+  expect(isObjectOf(shape, {})).toBeFalsy()
+  expect(isObjectOf(shape, { name: 'name', age: '0' })).toBeFalsy()
+  expect(isObjectOf(shape, pass)).toBeTruthy()
 
-  tap.notOk(isObjectOf(shape)(null))
-  tap.notOk(isObjectOf(shape)([]))
-  tap.notOk(isObjectOf(shape)({}))
-  tap.notOk(isObjectOf(shape)({ name: 'name', age: '0' }))
-  tap.ok(isObjectOf(shape)(pass))
+  expect(isObjectOf(shape)(null)).toBeFalsy()
+  expect(isObjectOf(shape)([])).toBeFalsy()
+  expect(isObjectOf(shape)({})).toBeFalsy()
+  expect(isObjectOf(shape)({ name: 'name', age: '0' })).toBeFalsy()
+  expect(isObjectOf(shape)(pass)).toBeTruthy()
 
   const something: unknown = null
   if (isObjectOf(shape, something)) {

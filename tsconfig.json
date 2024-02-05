@@ -1,12 +1,13 @@
 {
   "compilerOptions": {
-    "jsx": "react-jsx",
-    "target": "ESNext",
     "outDir": "dist",
+    "target": "ESNext",
+    "lib": ["ESNext"],
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
 
     "allowUmdGlobalAccess": false,
+    "allowImportingTsExtensions": false,
     "resolveJsonModule": true,
 
     "allowJs": false,

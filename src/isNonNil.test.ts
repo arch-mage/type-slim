@@ -1,8 +1,8 @@
-import tap from 'tap'
+import { expect, test } from 'vitest'
 import { isNonNil } from './isNonNil.js'
 
-tap.test('isNonNil', async (tap) => {
-  tap.notOk(isNonNil(null))
-  tap.notOk(isNonNil(undefined))
-  tap.ok(isNonNil(1))
+test('isNonNil', () => {
+  expect(isNonNil(null)).toBeFalsy()
+  expect(isNonNil(undefined)).toBeFalsy()
+  expect(isNonNil(1)).toBeTruthy()
 })

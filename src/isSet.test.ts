@@ -1,14 +1,14 @@
-import tap from 'tap'
+import { expect, test } from 'vitest'
 import { isSet } from './isSet.js'
 
-tap.test('isSet', async (tap) => {
-  tap.ok(isSet(new Set()), 'set')
-  tap.notOk((isSet as any)(), 'no arg')
-  tap.notOk(isSet(undefined), 'undefined')
-  tap.notOk(isSet(null), 'null')
-  tap.notOk(isSet({}), 'object')
-  tap.notOk(isSet([]), 'array')
-  tap.notOk(isSet(''), 'string')
-  tap.notOk(isSet(1), 'number')
-  tap.notOk(isSet(true), 'boolean')
+test('isSet', () => {
+  expect(isSet(new Set()), 'set').toBeTruthy()
+  expect((isSet as any)(), 'no arg').toBeFalsy()
+  expect(isSet(undefined), 'undefined').toBeFalsy()
+  expect(isSet(null), 'null').toBeFalsy()
+  expect(isSet({}), 'object').toBeFalsy()
+  expect(isSet([]), 'array').toBeFalsy()
+  expect(isSet(''), 'string').toBeFalsy()
+  expect(isSet(1), 'number').toBeFalsy()
+  expect(isSet(true), 'boolean').toBeFalsy()
 })
